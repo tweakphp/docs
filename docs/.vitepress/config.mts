@@ -47,14 +47,14 @@ export default defineConfig({
       }
     ],
 
-    // search: {
-    //   provider: 'algolia',
-    //   options: {
-    //     appId: '',
-    //     apiKey: '',
-    //     indexName: '',
-    //   }
-    // },
+    search: {
+      provider: 'algolia',
+      options: {
+        appId: 'DHNQBJ81R2',
+        apiKey: '0f2511abdffcfeca4792b249b6baf752',
+        indexName: 'tweakphp',
+      }
+    },
 
     sidebar: [
       {
