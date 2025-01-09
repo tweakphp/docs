@@ -53,7 +53,7 @@ features:
     icon:
       src: /linux.svg
     details: Available
-  - title: MacOS
+  - title: Windows
     icon:
       src: /windows.svg
     details: Soon!
