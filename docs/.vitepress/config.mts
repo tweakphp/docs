@@ -73,6 +73,7 @@ export default defineConfig({
       },
       {text: 'Start Tweaking', link: '/start'},
       {text: 'Docker', link: '/docker'},
+      {text: 'Kubernetes', link: '/kubernetes'},
       {text: 'SSH', link: '/ssh'},
       {text: 'Client Library', link: '/client'},
     ],

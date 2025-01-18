@@ -56,5 +56,5 @@ features:
   - title: Windows
     icon:
       src: /windows.svg
-    details: Soon!
+    details: Available (Alpha)
 ---

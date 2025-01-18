@@ -48,4 +48,6 @@ TweakPHP is also available as `.deb` package for `x64` only and you can download
 
 ## Windows
 
-We're working on the Windows build and we already have a [PR](https://github.com/tweakphp/tweakphp/pull/64) open 🤞
+Windows build is in `alpha` and available as `exe` file to download and install.
+
+To install TweakPHP on Windows, Simply download the app from the [Github Releases](https://github.com/tweakphp/tweakphp/releases)
