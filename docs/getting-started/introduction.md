@@ -6,7 +6,7 @@ It uses a bundled client php package to run your code inside your project.
 
 Depending on the framework of your project it recognizes how to load your app.
 
-For example, If your project is Laravel, It will include `vendor/autoload.php` and then botstraps your Laravel app and then runs your code in it.
+For example, If your project is Laravel, It will include `vendor/autoload.php` and then bootstraps your Laravel app and then runs your code in it.
 
 ## Features
 
