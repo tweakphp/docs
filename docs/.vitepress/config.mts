@@ -76,6 +76,7 @@ export default defineConfig({
       {text: 'Kubernetes', link: '/kubernetes'},
       {text: 'SSH', link: '/ssh'},
       {text: 'Client Library', link: '/client'},
+      {text: 'Custom Loaders', link: '/custom-loaders'},
     ],
     socialLinks: [
       {icon: 'github', link: 'https://github.com/tweakphp/tweakphp'},
