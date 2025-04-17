@@ -28,7 +28,7 @@ There are multiple ways to install TweakPHP on a Linux machine.
 To install from Snapcraft, simply run the following command:
 
 ```bash
-sudo snap install tweakphp
+sudo snap install --edge tweakphp
 ```
 
 ::: info
