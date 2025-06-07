@@ -33,6 +33,10 @@ features:
     icon:
       src: /ssh.svg
     details: Run on remote servers
+  - title: Vapor
+    icon:
+      src: /vapor.svg
+    details: Run your code on environments
   - title: Editor
     icon:
       src: /editor.svg

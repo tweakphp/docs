@@ -15,6 +15,7 @@ Here are some of the features that TweakPHP provides you.
 - **Local Run**: Run your PHP code in your local projects.
 - **Docker Run**: Run your PHP code inside a docker container.
 - **SSH Run**: Run your PHP code inside a remote server via SSH.
+- **Vapor Run**: Run your PHP code directly inside Vapor environment, if your project contains a vapor.yml file.
 - **Code Editor**: Uses Monaco Editor to write code.
 - **LSP**: Uses phpactor to show auto completions when writing code.
 - **Themes**: Supports dark and light mode themes.
