@@ -75,6 +75,7 @@ export default defineConfig({
       {text: 'Docker', link: '/docker'},
       {text: 'Kubernetes', link: '/kubernetes'},
       {text: 'SSH', link: '/ssh'},
+      {text: 'Vapor', link: '/vapor'},
       {text: 'Client Library', link: '/client'},
       {text: 'Custom Loaders', link: '/custom-loaders'},
     ],
