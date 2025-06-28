@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { useStorage } from '@vueuse/core'
+import { ref, onMounted } from 'vue'
 
-const contributors = useStorage<any[]>('contributors', [])
+const contributors = ref<any[]>([])
 
 const fromRepo = (repo: string) =>
     fetch(`https://api.github.com/repos/tweakphp/${repo}/contributors`)
@@ -16,30 +16,29 @@ const getContributors = async () => {
     fromRepo('.github'),
   ])
 
-  contributors.value = users.reduce((acc, data = []) => {
-    if (!Array.isArray(data)) {
-      return acc
-    }
-
-    return [...acc, ...data.filter(i => i.login)]
-  }, []).reduce((acc, user) => {
-    const existingUser = acc.find(u => u.id === user.id)
-
-    if (existingUser) {
-      existingUser.contributions += user.contributions
-      return acc
-    }
-
-    return [...acc, {
-      id: user.id,
-      username: user.login,
-      contributions: user.contributions,
-      avatar_url: user.avatar_url
-    }]
-  }, [])
+  contributors.value = users
+      .reduce((acc, data = []) => {
+        if (!Array.isArray(data)) return acc
+        return [...acc, ...data.filter(i => i.login)]
+      }, [])
+      .reduce((acc, user) => {
+        const existingUser = acc.find(u => u.id === user.id)
+        if (existingUser) {
+          existingUser.contributions += user.contributions
+          return acc
+        }
+        return [...acc, {
+          id: user.id,
+          username: user.login,
+          contributions: user.contributions,
+          avatar_url: user.avatar_url
+        }]
+      }, [])
 }
 
-getContributors()
+onMounted(() => {
+  getContributors()
+})
 </script>
 
 <template>
