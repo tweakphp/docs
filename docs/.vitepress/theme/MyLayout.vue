@@ -1,8 +1,8 @@
 <script setup>
-import DefaultTheme from 'vitepress/theme'
+import Theme from 'vitepress/theme'
 import Contributors from "./components/Contributors.vue";
 
-const { Layout } = DefaultTheme
+const { Layout } = Theme
 </script>
 
 <template>
