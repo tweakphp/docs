@@ -3,14 +3,11 @@ import {h} from 'vue'
 import Theme from 'vitepress/theme'
 import Contributors from './components/Contributors.vue'
 import './style.css'
+import MyLayout from "./MyLayout.vue";
 
 export default {
     extends: Theme,
-    Layout: () => {
-        return h(Theme.Layout, null, {
-            // https://vitepress.dev/guide/extending-default-theme#layout-slots
-        })
-    },
+    Layout: MyLayout,
     enhanceApp({app, router, siteData}) {
         // app.component('Component', Component)
         app.component('Contributors', Contributors)
