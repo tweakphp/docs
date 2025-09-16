@@ -87,7 +87,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Made with ❤️',
-      copyright: 'Copyright © 2024-present Saeed Vaziry'
+      copyright: 'Copyright © 2024-present Saeed Vaziry and TweakPHP contributors',
     }
   }
 })
