@@ -24,6 +24,6 @@ Here are the list of the supported loaders:
 
 - Laravel
 - Symfony
-- Wordpress
+- WordPress
 - Any composer project out of the box
 - More loaders will come soon
