@@ -11,6 +11,16 @@
 
 TweakPHP is available for MacOS (Apple Chip & Intel) in `zip` and `dmg` to download and install.
 
+### Homebrew
+
+You can install TweakPHP using Homebrew:
+
+```bash
+brew install tweakphp/tap/tweakphp
+```
+
+### Manual Installation
+
 To install TweakPHP on MacOS, Simply download the app from the [Github Releases](https://github.com/tweakphp/tweakphp/releases) and move the file into the Applications folder.
 
 ::: info

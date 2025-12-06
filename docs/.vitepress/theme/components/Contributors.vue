@@ -3,12 +3,56 @@ import { ref, onMounted } from 'vue'
 
 const contributors = ref<any[]>([])
 
+const CACHE_KEY = 'tweakphp_contributors'
+const CACHE_DURATION = 60 * 60 * 1000 // 1 hour in milliseconds
+
 const fromRepo = (repo: string) =>
     fetch(`https://api.github.com/repos/tweakphp/${repo}/contributors`)
         .then((res) => res.json())
         .catch(() => [])
 
+const getCachedData = () => {
+  if (typeof localStorage === 'undefined') return null
+
+  try {
+    const cached = localStorage.getItem(CACHE_KEY)
+    if (!cached) return null
+
+    const { data, timestamp } = JSON.parse(cached)
+    const now = Date.now()
+
+    if (now - timestamp < CACHE_DURATION) {
+      return data
+    }
+
+    localStorage.removeItem(CACHE_KEY)
+    return null
+  } catch {
+    return null
+  }
+}
+
+const setCachedData = (data: any[]) => {
+  if (typeof localStorage === 'undefined') return
+
+  try {
+    localStorage.setItem(CACHE_KEY, JSON.stringify({
+      data,
+      timestamp: Date.now()
+    }))
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 const getContributors = async () => {
+  const cached = getCachedData()
+
+  if (cached) {
+    contributors.value = cached
+    return
+  }
+
   const users = await Promise.all([
     fromRepo('tweakphp'),
     fromRepo('docs'),
@@ -16,7 +60,7 @@ const getContributors = async () => {
     fromRepo('.github'),
   ])
 
-  contributors.value = users
+  const result = users
       .reduce((acc, data = []) => {
         if (!Array.isArray(data)) return acc
         return [...acc, ...data.filter(i => i.login)]
@@ -34,6 +78,9 @@ const getContributors = async () => {
           avatar_url: user.avatar_url
         }]
       }, [])
+
+  contributors.value = result
+  setCachedData(result)
 }
 
 onMounted(() => {

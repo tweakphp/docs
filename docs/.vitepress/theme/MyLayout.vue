@@ -1,19 +1,30 @@
 <script setup>
+import { useData } from 'vitepress'
 import Theme from 'vitepress/theme'
-import Contributors from "./components/Contributors.vue";
+import HomePage from "./components/HomePage.vue";
 
 const { Layout } = Theme
+const { frontmatter } = useData()
 </script>
 
 <template>
   <Layout>
-    <template #home-features-after>
-      <div
-        class="flex flex-col justify-center items-center w-full mt-10"
-      >
-        <h3 class="text-4xl! font-semibold! text-center mb-4">Contributors</h3>
-        <Contributors />
-      </div>
+    <template #home-hero-before>
+      <HomePage v-if="frontmatter.customHome" />
     </template>
   </Layout>
 </template>
+
+<style>
+/* Hide default VitePress home content when using custom homepage */
+.VPHome:has(+ .home-page),
+.VPHome .VPHero,
+.VPHome .VPFeatures {
+  display: none !important;
+}
+
+/* When custom home is active, hide the default home layout elements */
+[data-custom-home="true"] .VPHome > *:not(.home-page) {
+  display: none !important;
+}
+</style>

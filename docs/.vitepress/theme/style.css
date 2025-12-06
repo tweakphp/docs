@@ -34,6 +34,60 @@
   --vp-custom-block-danger-bg: transparent;
   --vp-custom-block-danger-border: #ef4444;
   --vp-custom-block-danger-color: #ef4444;
+
+  /* Enhanced font smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide default VitePress home styles when using custom homepage */
+.custom-home .VPHome {
+  display: none !important;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navigation bar customization - Remove all borders */
+.VPNav {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.VPNav.has-sidebar {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+.VPLocalNav {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Force override the scrolled state */
+.VPNav.scrolled,
+.VPNav.scrolled.has-sidebar {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove any pseudo-element borders */
+.VPNav::after,
+.VPNav::before,
+.VPLocalNav::after,
+.VPLocalNav::before {
+  display: none !important;
+}
+
+/* Target all possible border sources */
+.VPNav .container,
+.VPNav .content,
+.VPNav .VPNavBar,
+.VPNavBar {
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 .warning .custom-block-title {
