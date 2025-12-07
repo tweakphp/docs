@@ -1,27 +1,27 @@
 # Installation
 
 - [MacOS](#macos)
+    - [Homebrew](#homebrew)
+    - [DMG File](#dmg-file)
 - [Linux](#linux)
     - [Snap](#snap)
     - [AppImage](#appimage)
     - [Deb Package](#deb-package)
+    - [RPM Package](#rpm-package)
+    - [Arch Linux (AUR)](#arch-linux-aur)
 - [Windows](#windows)
 
 ## MacOS
 
-TweakPHP is available for MacOS (Apple Chip & Intel) in `zip` and `dmg` to download and install.
-
 ### Homebrew
-
-You can install TweakPHP using Homebrew:
 
 ```bash
 brew install tweakphp/tap/tweakphp
 ```
 
-### Manual Installation
+### DMG File
 
-To install TweakPHP on MacOS, Simply download the app from the [Github Releases](https://github.com/tweakphp/tweakphp/releases) and move the file into the Applications folder.
+Download the `.dmg` file from the [releases page](https://github.com/tweakphp/tweakphp/releases) and drag TweakPHP to your Applications folder.
 
 ::: info
 Since TweakPHP is in beta and haven't been signed, You need to allow the app to be opened in the Privacy & Security.
@@ -35,29 +35,36 @@ There are multiple ways to install TweakPHP on a Linux machine.
 
 ### Snap
 
-To install from Snapcraft, simply run the following command:
-
 ```bash
-sudo snap install tweakphp
+snap install tweakphp
 ```
-
-::: info
-TweakPHP is only available for `amd64` based CPUs on Snapcraft
-:::
 
 ### AppImage
 
-The AppImage build can work on any Linux distro and is available for `x64` and `arm64`
-
-Download the AppImage from the [Github Releases](https://github.com/tweakphp/tweakphp/releases) and make the app executable `chmod +x TweakPHP-x.x.x.AppImage`
+1. Download the `.AppImage` file from the [releases page](https://github.com/tweakphp/tweakphp/releases)
+2. Make it executable: `chmod +x TweakPHP-*.AppImage`
+3. Run the AppImage
 
 ### Deb Package
 
 TweakPHP is also available as `.deb` package for `x64` only and you can download it from the [Github Releases](https://github.com/tweakphp/tweakphp/releases)
 
+### RPM Package
+
+Download the `.rpm` package from the [releases page](https://github.com/tweakphp/tweakphp/releases) and install it:
+
+```bash
+sudo rpm -i TweakPHP-*.rpm
+```
+
+### Arch Linux (AUR)
+
+```bash
+yay -S tweakphp-bin
+```
+
+or with any other AUR helper.
 
 ## Windows
 
-Windows build is in `alpha` and available as `exe` file to download and install.
-
-To install TweakPHP on Windows, Simply download the app from the [Github Releases](https://github.com/tweakphp/tweakphp/releases)
+Download the `.exe` installer from the [releases page](https://github.com/tweakphp/tweakphp/releases) and run it.
