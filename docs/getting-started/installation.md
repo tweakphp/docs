@@ -60,7 +60,7 @@ sudo rpm -i TweakPHP-*.rpm
 ### Arch Linux (AUR)
 
 ```bash
-yay -S tweakphp-bin
+yay -S tweakphp
 ```
 
 or with any other AUR helper.
