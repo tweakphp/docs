@@ -76,6 +76,7 @@ export default defineConfig({
       {text: 'Kubernetes', link: '/kubernetes'},
       {text: 'SSH', link: '/ssh'},
       {text: 'Vapor', link: '/vapor'},
+      {text: 'MCP Server', link: '/mcp-server'},
       {text: 'Client Library', link: '/client'},
       {text: 'Custom Loaders', link: '/custom-loaders'},
     ],
