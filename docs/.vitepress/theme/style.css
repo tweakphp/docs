@@ -1,31 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@300..600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --vp-c-brand-1: #be185d;
-  --vp-c-brand-2: #db2777;
-  --vp-c-brand-3: #ec4899;
-  --vp-c-brand-4: #831843;
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    var(--vp-c-brand-1) 30%,
-    #ec4899
-  );
+  /* Fonts — Instrument Sans / Geist Mono (inertiajs.com style) */
+  --vp-font-family-base: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --vp-font-family-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #be185d 50%,
-    #df77fc 50%
-  );
+  /* Brand — Inertia blue */
+  --vp-c-brand-1: #2563eb;
+  --vp-c-brand-2: #1d4ed8;
+  --vp-c-brand-3: #3b82f6;
+  --vp-c-brand-soft: rgba(37, 99, 235, 0.14);
+
+  /* Neutrals — light theme (Tailwind neutral scale) */
+  --vp-c-bg-alt: #fafafa;
+  --vp-c-bg-soft: #fafafa;
+  --vp-c-divider: #e5e5e5;
+  --vp-c-border: #e5e5e5;
+
+  /* Code blocks */
+  --vp-code-block-bg: #fafafa;
+
+  /* Home hero */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2563eb 30%, #3b82f6);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #2563eb 50%, #60a5fa 50%);
   --vp-home-hero-image-filter: blur(40px);
 
+  /* Custom blocks */
   --vp-custom-block-warning-bg: transparent;
   --vp-custom-block-warning-border: #eab308;
   --vp-custom-block-warning-color: #eab308;
 
   --vp-custom-block-info-bg: transparent;
-  --vp-custom-block-info-border:#6397f1;
-  --vp-custom-block-info-color:#6399f1;
+  --vp-custom-block-info-border: #3b82f6;
+  --vp-custom-block-info-color: #3b82f6;
 
   --vp-custom-block-success-bg: transparent;
   --vp-custom-block-success-border: #10b981;
@@ -38,6 +47,27 @@
   /* Enhanced font smoothing */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  /* Dark theme — inertiajs.com neutral dark */
+  --vp-c-brand-1: #3b82f6;
+  --vp-c-brand-2: #60a5fa;
+  --vp-c-brand-3: #93c5fd;
+  --vp-c-brand-soft: rgba(59, 130, 246, 0.16);
+
+  --vp-c-bg: #0a0b0f;
+  --vp-c-bg-alt: #101216;
+  --vp-c-bg-soft: #14161c;
+  --vp-c-divider: #26282e;
+  --vp-c-border: #26282e;
+  --vp-code-block-bg: #101216;
+}
+
+/* Headings — inertiajs.com style */
+h1, h2, h3, h4 {
+  font-weight: 500;
+  letter-spacing: -0.025rem;
 }
 
 /* Hide default VitePress home styles when using custom homepage */
@@ -106,65 +136,8 @@ html {
   color: var(--vp-custom-block-danger-color);
 }
 
-.image-container {
-  max-width: 650px !important;
-}
-
-.image-bg {
-  content: "";
-  position: absolute;
-  background: linear-gradient(
-    60deg,
-    #f79533,
-    #f37055,
-    #ef4e7b,
-    #a166ab,
-    #5073b8,
-    #1098ad,
-    #07b39b,
-    #6fba82
-  ) !important;
-  animation: animatedgradient 3s ease alternate infinite !important;
-  background-size: 500% 500% !important;
-}
-
-.image-src {
-  max-width: 560px !important;
-}
-
-@keyframes animatedgradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.VPHome .main .text {
-  font-size: 30px;
-}
-
-@media (max-width: 768px) {
-  .VPHome .main .text {
-    font-size: 20px;
-  }
-}
-
 .VPImage.logo {
   border-radius: 5px;
-}
-
-.VPHero .VPImage {
-  border-radius: 10px;
-  border: 1px solid #eaeaea;
-}
-
-.dark .VPHero .VPImage {
-  border: 1px solid rgb(68, 68, 68);
 }
 
 .VPButton.primary {
@@ -172,7 +145,7 @@ html {
   color: white;
   border: none;
   padding: 5px 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s;
 }
