@@ -1,16 +1,88 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@300..600&display=swap');
 @import "tailwindcss";
 
+/*
+ * Accent palettes — the exact scales used by the TweakPHP app
+ * (tweakphp/tweakphp · src/renderer/theme-primary-colors.ts).
+ * The active palette is selected via <html data-accent="..."> and
+ * persists in localStorage ("tweakphp_accent"). Default: dracula,
+ * the app's default editor theme.
+ */
+:root,
+html[data-accent='dracula'] {
+  --hp-accent-300: #dbc4fc;
+  --hp-accent-400: #ceaefa;
+  --hp-accent-500: #bd93f9;
+  --hp-accent-600: #8e6ebb;
+  --hp-accent-700: #685189;
+}
+
+html[data-accent='nord'] {
+  --hp-accent-300: #bedce5;
+  --hp-accent-400: #a6d0dc;
+  --hp-accent-500: #88c0d0;
+  --hp-accent-600: #66909c;
+  --hp-accent-700: #4b6a72;
+}
+
+html[data-accent='monokai'] {
+  --hp-accent-300: #ceef8c;
+  --hp-accent-400: #bce962;
+  --hp-accent-500: #a6e22e;
+  --hp-accent-600: #6c931e;
+  --hp-accent-700: #4b6615;
+}
+
+html[data-accent='github-light'] {
+  --hp-accent-300: #8ebaed;
+  --hp-accent-400: #4f94e2;
+  --hp-accent-500: #0366d6;
+  --hp-accent-600: #0252ab;
+  --hp-accent-700: #023d80;
+}
+
+html[data-accent='catppuccin'] {
+  --hp-accent-300: #e2caf1;
+  --hp-accent-400: #d7b6ec;
+  --hp-accent-500: #ca9ee6;
+  --hp-accent-600: #9876ac;
+  --hp-accent-700: #6f577e;
+}
+
+html[data-accent='night-owl'] {
+  --hp-accent-300: #e0c3f3;
+  --hp-accent-400: #d5adef;
+  --hp-accent-500: #c792ea;
+  --hp-accent-600: #956eb0;
+  --hp-accent-700: #6d5081;
+}
+
+html[data-accent='rose-pine'] {
+  --hp-accent-300: #f4b0c3;
+  --hp-accent-400: #f093ad;
+  --hp-accent-500: #eb6f92;
+  --hp-accent-600: #b0536e;
+  --hp-accent-700: #813d50;
+}
+
+html[data-accent='ultra-dark'] {
+  --hp-accent-300: #b3c7fb;
+  --hp-accent-400: #96b4f9;
+  --hp-accent-500: #7aa2f7;
+  --hp-accent-600: #5678b6;
+  --hp-accent-700: #3f5884;
+}
+
 :root {
   /* Fonts — Instrument Sans / Geist Mono (inertiajs.com style) */
   --vp-font-family-base: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --vp-font-family-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
 
-  /* Brand — Inertia blue */
-  --vp-c-brand-1: #2563eb;
-  --vp-c-brand-2: #1d4ed8;
-  --vp-c-brand-3: #3b82f6;
-  --vp-c-brand-soft: rgba(37, 99, 235, 0.14);
+  /* Brand — follows the selected accent palette */
+  --vp-c-brand-1: var(--hp-accent-600);
+  --vp-c-brand-2: var(--hp-accent-700);
+  --vp-c-brand-3: var(--hp-accent-500);
+  --vp-c-brand-soft: color-mix(in srgb, var(--hp-accent-500) 14%, transparent);
 
   /* Neutrals — light theme (Tailwind neutral scale) */
   --vp-c-bg-alt: #fafafa;
@@ -23,8 +95,8 @@
 
   /* Home hero */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #2563eb 30%, #3b82f6);
-  --vp-home-hero-image-background-image: linear-gradient(-45deg, #2563eb 50%, #60a5fa 50%);
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--hp-accent-600) 30%, var(--hp-accent-500));
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, var(--hp-accent-600) 50%, var(--hp-accent-400) 50%);
   --vp-home-hero-image-filter: blur(40px);
 
   /* Custom blocks */
@@ -51,10 +123,10 @@
 
 .dark {
   /* Dark theme — inertiajs.com neutral dark */
-  --vp-c-brand-1: #3b82f6;
-  --vp-c-brand-2: #60a5fa;
-  --vp-c-brand-3: #93c5fd;
-  --vp-c-brand-soft: rgba(59, 130, 246, 0.16);
+  --vp-c-brand-1: var(--hp-accent-500);
+  --vp-c-brand-2: var(--hp-accent-400);
+  --vp-c-brand-3: var(--hp-accent-300);
+  --vp-c-brand-soft: color-mix(in srgb, var(--hp-accent-500) 16%, transparent);
 
   --vp-c-bg: #0a0b0f;
   --vp-c-bg-alt: #101216;

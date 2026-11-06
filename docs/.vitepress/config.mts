@@ -15,6 +15,13 @@ export default defineConfig({
   title: "TweakPHP",
   description: "Easily tweak your PHP code",
   head: [
+    // Restore the selected accent theme before hydration (no flash of
+    // the default dracula palette for users who picked another theme).
+    [
+      'script',
+      {},
+      "try{var a=localStorage.getItem('tweakphp_accent');if(a&&/^[a-z-]+$/.test(a)){document.documentElement.setAttribute('data-accent',a)}}catch(e){}",
+    ],
     // [
     //   'script',
     //   {
@@ -82,13 +89,10 @@ export default defineConfig({
     ],
     socialLinks: [
       {icon: 'github', link: 'https://github.com/tweakphp/tweakphp'},
-      {icon: 'discord', link: 'https://discord.gg/Et3UTT4xwC'},
-      {icon: 'twitter', link: 'https://twitter.com/saeed_vz'},
-      {icon: 'youtube', link: 'https://www.youtube.com/@saeedvaziry'},
     ],
     footer: {
       message: 'Made with ❤️',
-      copyright: 'Copyright © 2024-present Saeed Vaziry and TweakPHP contributors',
+      copyright: 'Copyright © 2024-present David Galet & Saeed Vaziry & TweakPHP contributors',
     }
   }
 })
