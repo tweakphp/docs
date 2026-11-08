@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useData } from 'vitepress'
-import Contributors from './Contributors.vue'
 import AppIcon from './AppIcon.vue'
+import { useGithubStars } from '../composables/useGithubStars'
 
 const { isDark } = useData()
 
@@ -56,6 +56,8 @@ const restoreAccent = () => {
 const setAccent = (id) => {
   heroFallback.value = false
   applyAccent(id)
+  // Lasts for the current visit only — the next load picks a new
+  // random accent (see the head script in config.mts)
   try {
     localStorage.setItem(ACCENT_STORAGE_KEY, id)
   } catch {}
@@ -73,6 +75,15 @@ const heroScreenshot = computed(() => {
   }
   return ACCENTS.find((accent) => accent.id === selectedAccent.value)?.image ?? appScreenshot.light
 })
+
+/** Mobile carousel — which side is in view (0 = projects, 1 = editor) */
+const activeSlide = ref(0)
+const onCarouselScroll = (e) => {
+  const { scrollLeft, clientWidth } = e.currentTarget
+  if (clientWidth > 0) {
+    activeSlide.value = Math.min(1, Math.round(scrollLeft / clientWidth))
+  }
+}
 
 const isVisible = ref(false)
 
@@ -100,37 +111,8 @@ const runTypewriter = async () => {
   }
 }
 
-/** GitHub stars — shared by the CTA button and the stats band (cached 1h) */
-const githubStars = ref(null)
-
-const fetchGithubStars = () => {
-  if (typeof localStorage !== 'undefined') {
-    try {
-      const cached = localStorage.getItem('tweakphp_stars')
-      if (cached) {
-        const { data, timestamp } = JSON.parse(cached)
-        if (typeof data === 'number' && Date.now() - timestamp < 60 * 60 * 1000) {
-          githubStars.value = data
-          return
-        }
-      }
-    } catch {}
-  }
-
-  fetch('https://api.github.com/repos/tweakphp/tweakphp')
-    .then((res) => res.json())
-    .then((data) => {
-      if (data && typeof data.stargazers_count === 'number') {
-        githubStars.value = data.stargazers_count
-        if (typeof localStorage !== 'undefined') {
-          try {
-            localStorage.setItem('tweakphp_stars', JSON.stringify({ data: data.stargazers_count, timestamp: Date.now() }))
-          } catch {}
-        }
-      }
-    })
-    .catch(() => {})
-}
+/** GitHub stars — cached 1h, shared with the navbar pill (useGithubStars) */
+const { stars: githubStars, fetchStars: fetchGithubStars } = useGithubStars()
 
 onMounted(() => {
   restoreAccent()
@@ -169,8 +151,8 @@ onBeforeUnmount(() => {
         </h1>
 
         <p class="hero-description">
-          The open source playground cross-platform desktop app for <b>testing and running PHP code.</b>
-          Connect to local projects, Docker or Kubernetes containers, SSH servers, or Laravel Vapor
+          The <b>open source playground</b> cross-platform desktop app for <b>testing and running PHP code.</b>
+          Connect to local projects, Docker containers, Kubernetes pods, SSH servers, or Laravel Vapor
           with a beautiful Monaco-powered editor.
         </p>
 
@@ -200,6 +182,7 @@ onBeforeUnmount(() => {
 
       <!-- App screenshot -->
       <div class="hero-visual" :class="{ visible: isVisible }">
+        <!-- Desktop: full screenshot -->
         <div class="screenshot-window">
           <img
             class="screenshot"
@@ -207,6 +190,52 @@ onBeforeUnmount(() => {
             alt="TweakPHP app"
             @error="heroFallback = true"
           />
+        </div>
+
+        <!-- Mobile: full-height sides — projects, then editor -->
+        <div
+          class="screenshot-carousel"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="TweakPHP app preview"
+        >
+          <div class="carousel-track" @scroll="onCarouselScroll">
+            <figure class="carousel-slide">
+              <div class="slide-window">
+                <img
+                  class="slide-img slide-img-left"
+                  :src="heroScreenshot"
+                  alt="TweakPHP app — projects sidebar"
+                  @error="heroFallback = true"
+                />
+              </div>
+              <figcaption class="slide-caption">
+                <strong>Your projects</strong> — local, Docker, SSH and Vapor in one place
+              </figcaption>
+            </figure>
+
+            <figure class="carousel-slide">
+              <div class="slide-window">
+                <img
+                  class="slide-img slide-img-right"
+                  :src="heroScreenshot"
+                  alt="TweakPHP app — Monaco editor and output"
+                  @error="heroFallback = true"
+                />
+              </div>
+              <figcaption class="slide-caption">
+                <strong>Monaco editor</strong> — AI completion, run code, inspect output
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="carousel-dots" aria-hidden="true">
+            <span
+              v-for="i in 2"
+              :key="i"
+              :class="{ active: activeSlide === i - 1 }"
+            ></span>
+          </div>
         </div>
       </div>
 
@@ -235,7 +264,7 @@ onBeforeUnmount(() => {
       <div class="section-header">
         <p class="section-eyebrow">Features</p>
         <h2 class="section-title">Elevate your PHP development</h2>
-        <p class="section-subtitle">TweakPHP is packed with production-ready features designed to accelerate your workflow and make testing PHP code a breeze.</p>
+        <p class="section-subtitle">TweakPHP is packed with production-ready features designed to accelerate your workflow and make testing PHP code a breeze.<br>Built by developers, for developers.</p>
       </div>
 
 
@@ -605,6 +634,100 @@ onBeforeUnmount(() => {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Mobile carousel — the screenshot shown in two full-height sides */
+.screenshot-carousel {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .screenshot-window {
+    display: none;
+  }
+
+  .screenshot-carousel {
+    display: block;
+  }
+
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    margin: 0;
+    padding: 0 8px;
+  }
+
+  .slide-window {
+    background: var(--vp-c-bg);
+    border: 1px solid var(--hp-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.18);
+    height: 72vh;
+    height: 72svh;
+  }
+
+  .slide-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide-img-left {
+    object-position: left center;
+  }
+
+  .slide-img-right {
+    /* Shift the crop window left so the output panel's values
+       ("Sunday", ...) aren't cut at the left edge */
+    object-position: 75% center;
+  }
+
+  .slide-caption {
+    margin: 0.875rem 0 0;
+    padding: 0 1.25rem;
+    text-align: center;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--vp-c-text-2);
+  }
+
+  .slide-caption strong {
+    color: var(--vp-c-text-1);
+    font-weight: 600;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .carousel-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--hp-border);
+    transition: background-color 0.25s;
+  }
+
+  .carousel-dots span.active {
+    background: var(--hp-accent-500);
+  }
 }
 
 /* Sections */

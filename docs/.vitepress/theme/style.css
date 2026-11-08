@@ -90,6 +90,10 @@ html[data-accent='ultra-dark'] {
   --vp-c-divider: #e5e5e5;
   --vp-c-border: #e5e5e5;
 
+  /* Menu — semi-transparent (frosted glass) */
+  --vp-nav-bg-color: rgba(255, 255, 255, 0.58);
+  --vp-local-nav-bg-color: rgba(255, 255, 255, 0.58);
+
   /* Code blocks */
   --vp-code-block-bg: #fafafa;
 
@@ -134,6 +138,49 @@ html[data-accent='ultra-dark'] {
   --vp-c-divider: #26282e;
   --vp-c-border: #26282e;
   --vp-code-block-bg: #101216;
+
+  /* Menu — semi-transparent (frosted glass) */
+  --vp-nav-bg-color: rgba(10, 11, 15, 0.55);
+  --vp-local-nav-bg-color: rgba(10, 11, 15, 0.55);
+}
+
+/* Frosted glass — ONE translucent layer on the whole navbar strip.
+   VitePress paints the same bg again on the inner .content-body on docs
+   pages; stacking two translucent layers doubles the opacity and shows
+   as bands, so the inner one is forced transparent. */
+.VPNavBar,
+.VPNavBar.home.top {
+  background-color: var(--vp-nav-bg-color);
+}
+
+.VPNavBar:not(.home.top) .content-body,
+.VPNavBar .content-body {
+  background-color: transparent;
+}
+
+.VPNavBar,
+.VPLocalNav {
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+}
+
+/* Blend the Search pill into the frosted bar instead of a solid box */
+.VPNavBar .DocSearch-Button {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.VPNavBar .DocSearch-Button:hover,
+.VPNavBar .DocSearch-Button:focus {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.dark .VPNavBar .DocSearch-Button {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark .VPNavBar .DocSearch-Button:hover,
+.dark .VPNavBar .DocSearch-Button:focus {
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 /* Headings — inertiajs.com style */
