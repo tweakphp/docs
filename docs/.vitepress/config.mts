@@ -72,6 +72,8 @@ export default defineConfig({
         items: [
           {text: 'Get Started', link: '/getting-started/introduction'},
           {text: 'Installation', link: '/getting-started/installation'},
+          {text: 'Projects', link: '/projects'},
+          {text: 'MCP Server', link: '/mcp-server'},
         ]
       },
       {
@@ -108,8 +110,13 @@ export default defineConfig({
         ]
       },
       {text: 'Start Tweaking', link: '/start'},
+      {text: 'Projects', link: '/projects'},
+      {text: 'Editor & Output', link: '/editor-output'},
+      {text: 'Snippets', link: '/snippets'},
+      {text: 'AI Completion', link: '/ai-completion'},
       {text: 'Docker', link: '/docker'},
       {text: 'Kubernetes', link: '/kubernetes'},
+      {text: 'WSL', link: '/wsl'},
       {text: 'SSH', link: '/ssh'},
       {text: 'Vapor', link: '/vapor'},
       {text: 'MCP Server', link: '/mcp-server'},
