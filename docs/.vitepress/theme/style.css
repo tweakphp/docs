@@ -1,31 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Geist+Mono:wght@300..600&display=swap');
 @import "tailwindcss";
 
-:root {
-  --vp-c-brand-1: #be185d;
-  --vp-c-brand-2: #db2777;
-  --vp-c-brand-3: #ec4899;
-  --vp-c-brand-4: #831843;
-  --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    var(--vp-c-brand-1) 30%,
-    #ec4899
-  );
+/*
+ * Accent palettes — the exact scales used by the TweakPHP app
+ * (tweakphp/tweakphp · src/renderer/theme-primary-colors.ts).
+ * The active palette is selected via <html data-accent="..."> and
+ * persists in localStorage ("tweakphp_accent"). Default: dracula,
+ * the app's default editor theme.
+ */
+:root,
+html[data-accent='dracula'] {
+  --hp-accent-300: #dbc4fc;
+  --hp-accent-400: #ceaefa;
+  --hp-accent-500: #bd93f9;
+  --hp-accent-600: #8e6ebb;
+  --hp-accent-700: #685189;
+}
 
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #be185d 50%,
-    #df77fc 50%
-  );
+html[data-accent='nord'] {
+  --hp-accent-300: #bedce5;
+  --hp-accent-400: #a6d0dc;
+  --hp-accent-500: #88c0d0;
+  --hp-accent-600: #66909c;
+  --hp-accent-700: #4b6a72;
+}
+
+html[data-accent='monokai'] {
+  --hp-accent-300: #ceef8c;
+  --hp-accent-400: #bce962;
+  --hp-accent-500: #a6e22e;
+  --hp-accent-600: #6c931e;
+  --hp-accent-700: #4b6615;
+}
+
+html[data-accent='github-light'] {
+  --hp-accent-300: #8ebaed;
+  --hp-accent-400: #4f94e2;
+  --hp-accent-500: #0366d6;
+  --hp-accent-600: #0252ab;
+  --hp-accent-700: #023d80;
+}
+
+html[data-accent='catppuccin'] {
+  --hp-accent-300: #e2caf1;
+  --hp-accent-400: #d7b6ec;
+  --hp-accent-500: #ca9ee6;
+  --hp-accent-600: #9876ac;
+  --hp-accent-700: #6f577e;
+}
+
+html[data-accent='night-owl'] {
+  --hp-accent-300: #e0c3f3;
+  --hp-accent-400: #d5adef;
+  --hp-accent-500: #c792ea;
+  --hp-accent-600: #956eb0;
+  --hp-accent-700: #6d5081;
+}
+
+html[data-accent='rose-pine'] {
+  --hp-accent-300: #f4b0c3;
+  --hp-accent-400: #f093ad;
+  --hp-accent-500: #eb6f92;
+  --hp-accent-600: #b0536e;
+  --hp-accent-700: #813d50;
+}
+
+html[data-accent='ultra-dark'] {
+  --hp-accent-300: #b3c7fb;
+  --hp-accent-400: #96b4f9;
+  --hp-accent-500: #7aa2f7;
+  --hp-accent-600: #5678b6;
+  --hp-accent-700: #3f5884;
+}
+
+:root {
+  /* Fonts — Instrument Sans / Geist Mono (inertiajs.com style) */
+  --vp-font-family-base: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --vp-font-family-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+
+  /* Brand — follows the selected accent palette */
+  --vp-c-brand-1: var(--hp-accent-600);
+  --vp-c-brand-2: var(--hp-accent-700);
+  --vp-c-brand-3: var(--hp-accent-500);
+  --vp-c-brand-soft: color-mix(in srgb, var(--hp-accent-500) 14%, transparent);
+
+  /* Neutrals — light theme (Tailwind neutral scale) */
+  --vp-c-bg-alt: #fafafa;
+  --vp-c-bg-soft: #fafafa;
+  --vp-c-divider: #e5e5e5;
+  --vp-c-border: #e5e5e5;
+
+  /* Menu — semi-transparent (frosted glass) */
+  --vp-nav-bg-color: rgba(255, 255, 255, 0.58);
+  --vp-local-nav-bg-color: rgba(255, 255, 255, 0.58);
+
+  /* Code blocks */
+  --vp-code-block-bg: #fafafa;
+
+  /* Home hero */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, var(--hp-accent-600) 30%, var(--hp-accent-500));
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, var(--hp-accent-600) 50%, var(--hp-accent-400) 50%);
   --vp-home-hero-image-filter: blur(40px);
 
+  /* Custom blocks */
   --vp-custom-block-warning-bg: transparent;
   --vp-custom-block-warning-border: #eab308;
   --vp-custom-block-warning-color: #eab308;
 
   --vp-custom-block-info-bg: transparent;
-  --vp-custom-block-info-border:#6397f1;
-  --vp-custom-block-info-color:#6399f1;
+  --vp-custom-block-info-border: #3b82f6;
+  --vp-custom-block-info-color: #3b82f6;
 
   --vp-custom-block-success-bg: transparent;
   --vp-custom-block-success-border: #10b981;
@@ -38,6 +123,70 @@
   /* Enhanced font smoothing */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  /* Dark theme — inertiajs.com neutral dark */
+  --vp-c-brand-1: var(--hp-accent-500);
+  --vp-c-brand-2: var(--hp-accent-400);
+  --vp-c-brand-3: var(--hp-accent-300);
+  --vp-c-brand-soft: color-mix(in srgb, var(--hp-accent-500) 16%, transparent);
+
+  --vp-c-bg: #0a0b0f;
+  --vp-c-bg-alt: #101216;
+  --vp-c-bg-soft: #14161c;
+  --vp-c-divider: #26282e;
+  --vp-c-border: #26282e;
+  --vp-code-block-bg: #101216;
+
+  /* Menu — semi-transparent (frosted glass) */
+  --vp-nav-bg-color: rgba(10, 11, 15, 0.55);
+  --vp-local-nav-bg-color: rgba(10, 11, 15, 0.55);
+}
+
+/* Frosted glass — ONE translucent layer on the whole navbar strip.
+   VitePress paints the same bg again on the inner .content-body on docs
+   pages; stacking two translucent layers doubles the opacity and shows
+   as bands, so the inner one is forced transparent. */
+.VPNavBar,
+.VPNavBar.home.top {
+  background-color: var(--vp-nav-bg-color);
+}
+
+.VPNavBar:not(.home.top) .content-body,
+.VPNavBar .content-body {
+  background-color: transparent;
+}
+
+.VPNavBar,
+.VPLocalNav {
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+}
+
+/* Blend the Search pill into the frosted bar instead of a solid box */
+.VPNavBar .DocSearch-Button {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+.VPNavBar .DocSearch-Button:hover,
+.VPNavBar .DocSearch-Button:focus {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.dark .VPNavBar .DocSearch-Button {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark .VPNavBar .DocSearch-Button:hover,
+.dark .VPNavBar .DocSearch-Button:focus {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Headings — inertiajs.com style */
+h1, h2, h3, h4 {
+  font-weight: 500;
+  letter-spacing: -0.025rem;
 }
 
 /* Hide default VitePress home styles when using custom homepage */
@@ -106,65 +255,8 @@ html {
   color: var(--vp-custom-block-danger-color);
 }
 
-.image-container {
-  max-width: 650px !important;
-}
-
-.image-bg {
-  content: "";
-  position: absolute;
-  background: linear-gradient(
-    60deg,
-    #f79533,
-    #f37055,
-    #ef4e7b,
-    #a166ab,
-    #5073b8,
-    #1098ad,
-    #07b39b,
-    #6fba82
-  ) !important;
-  animation: animatedgradient 3s ease alternate infinite !important;
-  background-size: 500% 500% !important;
-}
-
-.image-src {
-  max-width: 560px !important;
-}
-
-@keyframes animatedgradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.VPHome .main .text {
-  font-size: 30px;
-}
-
-@media (max-width: 768px) {
-  .VPHome .main .text {
-    font-size: 20px;
-  }
-}
-
 .VPImage.logo {
   border-radius: 5px;
-}
-
-.VPHero .VPImage {
-  border-radius: 10px;
-  border: 1px solid #eaeaea;
-}
-
-.dark .VPHero .VPImage {
-  border: 1px solid rgb(68, 68, 68);
 }
 
 .VPButton.primary {
@@ -172,7 +264,7 @@ html {
   color: white;
   border: none;
   padding: 5px 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s;
 }
