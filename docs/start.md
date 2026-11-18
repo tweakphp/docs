@@ -12,7 +12,7 @@ To get started, You need to have your project on your local machine. Click the p
 
 After you opened a project, you can write something on the editor and hit `Command+R` on mac or `Ctrl+R` on other operating systems to run the code.
 
-The results will appear on the left editor (read-only).
+The results appear in the output panel next to the editor. Depending on the selected output mode you get plain text, or one card per statement with dumps and return values. Read more about the [output modes](./editor-output.md)
 
 ## How it works?
 
